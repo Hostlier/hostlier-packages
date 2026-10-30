@@ -41,7 +41,7 @@ sudo hostlier package describe postgres
 sudo hostlier package list
 ```
 
-Installed executables live at `/var/lib/hostlier/packages/<name>`. Use `--state-dir DIR` for another controller state directory. Installation is server-local. The controller pins the executable digest during planning and rejects replacement before an approved apply.
+Installed executables live at `/var/lib/hostlier/packages/<name>`. Use `--state-dir DIR` for another controller state directory. With no explicit `--server` or `--socket`, installation is server-local. The controller pins the executable digest during planning and rejects replacement before an approved apply.
 
 ## Examples and sample workflows
 
@@ -71,3 +71,29 @@ This repository is the home for future package development. Existing core-checko
 ## Continuous integration
 
 Local verification commands are available through the Makefile. An [inactive GitHub Actions example](ci/README.md) is included; enabling it requires a GitHub credential with permission to publish workflows.
+
+## CLI installation from GitHub
+
+With a Hostlier CLI that supports GitHub packages, select a published release:
+
+```sh
+hostlier package install postgres --version v0.1.0 --server production
+hostlier package list --server production
+```
+
+The CLI selects the connected server's OS and architecture, downloads the release asset locally, checks SHA-256 and executable format, uploads inert chunks, and requests exact hardware approval before installation. GitHub credentials remain on the CLI machine; authenticate using `gh auth login`, `GH_TOKEN`, or `GITHUB_TOKEN` while this repository is private. The controller requires neither Go, Git, nor GitHub access. Install to a host directly through its saved profile; fleet `--on` routing is not supported for package installation.
+
+The local Go package-authoring SDK can be added to an existing project:
+
+```sh
+go mod init example.com/my-package
+hostlier sdk install --version v0.1.0
+```
+
+This resolves the repository tag to a commit and adds `github.com/Usefused/hostlier-packages/sdk/packagekit` through Go modules. It is the standalone package-authoring SDK, distinct from the broader hosting-sdk project. Go and Git are needed on the development machine. Go authentication and private-module settings are scoped to the install command; subsequent direct Go commands need your normal private-module setup.
+
+## Release artifacts
+
+`make release` builds standard packages for Linux and macOS, amd64 and arm64, in `dist/releases/`, with `SHA256SUMS`. Asset names are `hostlier-NAME-OS-ARCH`, as required by the CLI. Set `RELEASE_OS=linux`, `RELEASE_ARCH=arm64`, or `WITH_PULUMI=1` to adjust the build. Pulumi remains an optional separate-module build; standard releases do not include it unless explicitly selected.
+
+Publish assets built from the release tag together with `SHA256SUMS`. Release automation is not active; the inactive Actions example does not publish artifacts. Keep this repository private until explicitly approved for public access.

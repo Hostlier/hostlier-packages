@@ -24,3 +24,7 @@ pulumi-test:
 	cd packages/pulumi && go vet ./... && go test -race ./...
 clean:
 	rm -rf dist
+
+.PHONY: release
+release:
+	./scripts/release.sh
