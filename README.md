@@ -97,3 +97,16 @@ This resolves the repository tag to a commit and adds `github.com/Usefused/hostl
 `make release` builds standard packages for Linux and macOS, amd64 and arm64, in `dist/releases/`, with `SHA256SUMS`. Asset names are `hostlier-NAME-OS-ARCH`, as required by the CLI. Set `RELEASE_OS=linux`, `RELEASE_ARCH=arm64`, or `WITH_PULUMI=1` to adjust the build. Pulumi remains an optional separate-module build; standard releases do not include it unless explicitly selected.
 
 Publish assets built from the release tag together with `SHA256SUMS`. Release automation is not active; the inactive Actions example does not publish artifacts. Keep this repository private until explicitly approved for public access.
+
+## Provider-independent Git catalog
+
+The root `hostlier-packages.json` makes package discovery available through ordinary Git transport:
+
+```sh
+hostlier package available --repository https://github.com/Usefused/hostlier-packages.git
+hostlier package install postgres --repository https://github.com/Usefused/hostlier-packages.git --version COMMIT_FROM_LIST --server production
+```
+
+Use a CLI with Git-catalog support. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository remains private, and its own release asset API URLs reuse the local GitHub login.
+
+The catalog format does not require GitHub: each package has named platform artifacts with a SHA-256 and either a tracked-file `path` or an HTTPS `url`. A mirror can host the Git repository on GitLab, Bitbucket, or a self-hosted server and choose its own artifact locations. Generic external HTTPS artifacts do not inherit Git repository credentials; tracked Git blobs support private or offline distribution. See the core [Git catalog guide](https://github.com/Usefused/hosting-sdk/blob/main/hostlier/docs/git-package-catalog.md) for the schema. Update the catalog in a new commit when publishing replacement binary artifacts; existing commit-based selections retain their previous checksums.
