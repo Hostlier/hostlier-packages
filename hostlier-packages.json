@@ -37,25 +37,25 @@
           "os": "darwin",
           "arch": "amd64",
           "path": "binaries/hostlier-harnest-darwin-amd64",
-          "sha256": "ce6769e4946b62ef4345b0ff7671254fab2323efaa13e361e0e2da78084e1cb7"
+          "sha256": "2ac2d2c2534ff9211f1b347bfbcbd3f14046e23a31b1a5b8c0543e29afe63265"
         },
         {
           "os": "darwin",
           "arch": "arm64",
           "path": "binaries/hostlier-harnest-darwin-arm64",
-          "sha256": "340339ee9c57147a759ba2a893173384ac4becb3ab7ea0723a669a832cb8c511"
+          "sha256": "934170001e2361dcfbfb27c0af8cd4b3181d6ad99f1703b0bfadcde61ad342cc"
         },
         {
           "os": "linux",
           "arch": "amd64",
           "path": "binaries/hostlier-harnest-linux-amd64",
-          "sha256": "ec9d79538a8f904184a4e8e3ae7d4d6f546bfbabc41e49c0e59e896058e184be"
+          "sha256": "4910738ac4c5b154f16f9d9c7b9d6300b47093baee4e09c02424913e4bd74896"
         },
         {
           "os": "linux",
           "arch": "arm64",
           "path": "binaries/hostlier-harnest-linux-arm64",
-          "sha256": "d2dfce90381307f0d95530921858f791cfd573f490106cd8c5b47d4c76285267"
+          "sha256": "49f53e084d0051b29809760576272ee57edff5274931b5ad5df901eec948ab2c"
         }
       ]
     },
