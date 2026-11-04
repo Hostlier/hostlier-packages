@@ -79,7 +79,7 @@ Local verification commands are available through the Makefile. An [inactive Git
 With a Hostlier CLI that supports GitHub packages, select a published release:
 
 ```sh
-hostlier package install postgres --version v0.1.0 --server production
+hostlier package install postgres --github Usefused/hostlier-packages --version v0.1.0 --server production
 hostlier package list --server production
 ```
 
@@ -123,6 +123,6 @@ The commit contains the four Linux/macOS amd64/arm64 executables for each projec
 
 To test discovery, install and enrollment in throwaway projects, run `python3 scripts/test-project-catalog.py --cli /path/to/hostlier --repository "$catalog" --version COMMIT_FROM_LIST`.
 
-Use a CLI with Git-catalog support. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository remains private, and its own release asset API URLs reuse the local GitHub login.
+The updated Hostlier CLI uses this Git catalog by default. For earlier clients with Git-catalog support, specify `--repository` explicitly. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository remains private, and its own release asset API URLs reuse the local GitHub login.
 
 The catalog format does not require GitHub: each package has named platform artifacts with a SHA-256 and either a tracked-file `path` or an HTTPS `url`. A mirror can host the Git repository on GitLab, Bitbucket, or a self-hosted server and choose its own artifact locations. Generic external HTTPS artifacts do not inherit Git repository credentials; tracked Git blobs support private or offline distribution. See the core [Git catalog guide](docs/git-package-catalog.md) for the schema. Update the catalog in a new commit when publishing replacement binary artifacts; existing commit-based selections retain their previous checksums.

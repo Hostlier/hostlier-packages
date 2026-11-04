@@ -16,14 +16,16 @@ def run(cli, root, *args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cli", required=True, type=Path)
-    parser.add_argument("--repository", required=True)
+    parser.add_argument("--repository", help="override the default official Git catalog")
     parser.add_argument("--version", required=True)
     args = parser.parse_args()
     cli = args.cli.resolve()
-    selection = ["--repository", args.repository, "--version", args.version]
+    source = ["--repository", args.repository] if args.repository else []
+    selection = [*source, "--version", args.version]
     with tempfile.TemporaryDirectory(prefix="hostlier-catalog-") as tmp:
         root = Path(tmp).resolve()
         catalog = run(cli, root, "package", "available", *selection)
+        selection = [*source, "--version", catalog["version"]]
         available = {item["name"] for item in catalog["packages"]}
         if not {"harnest", "minion", "postgres"} <= available:
             raise ValueError(f"incomplete package catalog: {available}")
