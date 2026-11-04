@@ -1,6 +1,6 @@
 # Hostlier packages
 
-Optional, independently built executables for Hostlier database, provider, and infrastructure operations. This repository is private for now and contains the source needed to inspect, test, and build each package without checking out the Hostlier controller or CLI.
+Optional, independently built executables for Hostlier database, provider, and infrastructure operations. This private repository contains the provider package sources and distributes the Minion and Harnest project adapters from their owner repositories.
 
 Hostlier core lives in [Usefused/hosting-sdk](https://github.com/Usefused/hosting-sdk/tree/main/hostlier). The CLI installs package binaries on the server; the controller calls them through versioned JSON over private stdin/stdout pipes. The package source and its implementation dependencies stay outside both core executables.
 
@@ -8,6 +8,8 @@ Hostlier core lives in [Usefused/hosting-sdk](https://github.com/Usefused/hostin
 
 | Executable | Implementation | Current scope |
 | --- | --- | --- |
+| `hostlier-minion` | Hostlier’s Minion package | Local app initialization, planning and container packaging |
+| `hostlier-harnest` | Harnest’s Hostlier adapter | Local agent initialization, planning and container packaging |
 | `hostlier-postgres` | [Native engines](packages/engines), [runtime adapters](internal/resources) | Local PostgreSQL instances; scoped databases on existing servers |
 | `hostlier-redis` | [Native engines](packages/engines), [runtime adapters](internal/resources) | Local Redis instances; ACL-scoped access on existing servers |
 | `hostlier-neo4j` | [Runtime adapters](internal/resources) | Local Neo4j resource operations |
@@ -106,6 +108,20 @@ The root `hostlier-packages.json` makes package discovery available through ordi
 hostlier package available --repository https://github.com/Usefused/hostlier-packages.git
 hostlier package install postgres --repository https://github.com/Usefused/hostlier-packages.git --version COMMIT_FROM_LIST --server production
 ```
+
+Install project adapters on the CLI machine. Choose a commit from discovery and run these commands in a fresh project for each adapter:
+
+```sh
+catalog=https://github.com/Usefused/hostlier-packages.git
+hostlier package install minion --repository "$catalog" --version COMMIT_FROM_LIST
+hostlier init
+hostlier package add minion
+# In a second project, repeat the same steps with harnest.
+```
+
+The commit contains the four Linux/macOS amd64/arm64 executables for each project adapter under `binaries/`. Every catalog entry pins the SHA-256 of the corresponding file. The release script uses these same verified bytes. To refresh them from reviewed source checkouts, run `python3 scripts/catalog-project-packages.py --hostlier /path/to/hostlier --harnest /path/to/Harnest`, then commit the regenerated binaries and catalog together. Run `python3 scripts/catalog-project-packages.py --verify` to check all eight without building or downloading anything.
+
+To test discovery, install and enrollment in throwaway projects, run `python3 scripts/test-project-catalog.py --cli /path/to/hostlier --repository "$catalog" --version COMMIT_FROM_LIST`.
 
 Use a CLI with Git-catalog support. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository remains private, and its own release asset API URLs reuse the local GitHub login.
 
