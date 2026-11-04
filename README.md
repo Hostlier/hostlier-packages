@@ -119,6 +119,18 @@ hostlier package add minion
 # In a second project, repeat the same steps with harnest.
 ```
 
+Harnest accepts a digest-pinned multi-platform index under `packages.harnest.baseImage`. To choose different images per target, set `baseImages` instead:
+
+```yaml
+packages:
+  harnest:
+    baseImages:
+      linux/amd64: debian@sha256:a3bba7dc7dbcc1f37c2856c51fc9a7fac96608f50cb87b1b4e4d8b8c85ae988e
+      linux/arm64: debian@sha256:7ccb8b5b60c7654f5b795d94ee7d751cd0811500803f0b09cefcd555e755a55a
+```
+
+Planning reads registry metadata to verify the selected target and records the child manifest digest that packaging uses in the Dockerfile. A missing platform or a mismatched pin fails the plan.
+
 The commit contains the four Linux/macOS amd64/arm64 executables for each project adapter under `binaries/`. Every catalog entry pins the SHA-256 of the corresponding file. The release script uses these same verified bytes. To refresh them from reviewed source checkouts, run `python3 scripts/catalog-project-packages.py --hostlier /path/to/hostlier --harnest /path/to/Harnest`, then commit the regenerated binaries and catalog together. Run `python3 scripts/catalog-project-packages.py --verify` to check all eight without building or downloading anything.
 
 To test discovery, install and enrollment in throwaway projects, run `python3 scripts/test-project-catalog.py --cli /path/to/hostlier --repository "$catalog" --version COMMIT_FROM_LIST`.
