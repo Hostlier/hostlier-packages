@@ -144,8 +144,9 @@ The catalog format does not require GitHub: each package has named platform arti
 The Git catalog includes `sandbox-browser` and `sandbox-computer` for macOS/Linux on AMD64/ARM64. Install them on the CLI machine and add them to an existing v2 application:
 
 ```sh
-hostlier package install sandbox-browser
-hostlier package install sandbox-computer
+catalog_version=4c8232f3763989ff4366453eca02d3b0a21901e3
+hostlier package install sandbox-browser --version "$catalog_version"
+hostlier package install sandbox-computer --version "$catalog_version"
 hostlier package add sandbox-browser
 hostlier package add sandbox-computer
 ```

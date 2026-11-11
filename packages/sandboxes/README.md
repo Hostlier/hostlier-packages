@@ -12,11 +12,12 @@ These are additive `project-contribute` packages. They require Hostlier's `sidec
 On the CLI machine:
 
 ```sh
-hostlier package install sandbox-browser
-hostlier package install sandbox-computer
+catalog_version=4c8232f3763989ff4366453eca02d3b0a21901e3
+hostlier package install sandbox-browser --version "$catalog_version"
+hostlier package install sandbox-computer --version "$catalog_version"
 ```
 
-These commands use Hostlier's default package Git catalog. For an explicit immutable version, obtain the commit from `hostlier package available`, then pass `--version COMMIT` to both install commands. Older Git-catalog clients can also specify `--repository https://github.com/Usefused/hostlier-packages.git`. The repository remains private and uses your existing local Git credentials.
+These commands use Hostlier's default package Git catalog. Installation requires `--version`. The example pins the published sandbox commit; for updates, obtain the full commit from `hostlier package available` and pass it to both install commands. Older Git-catalog clients can also specify `--repository https://github.com/Usefused/hostlier-packages.git`. The repository remains private and uses your existing local Git credentials.
 
 The installed CLI must understand additive `sidecars` and `secrets` project contributions; package installation alone does not upgrade Hostlier core. Use the compatible CLI/controller built from the sandbox implementation before deployment; this package publication does not release those core changes.
 
