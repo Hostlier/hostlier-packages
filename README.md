@@ -81,7 +81,7 @@ Local verification commands are available through the Makefile. An [inactive Git
 With a Hostlier CLI that supports GitHub packages, select a published release:
 
 ```sh
-hostlier package install postgres --github Usefused/hostlier-packages --version v0.1.0 --server production
+hostlier package install postgres --github Hostlier/hostlier-packages --version v0.1.0 --server production
 hostlier package list --server production
 ```
 
@@ -107,14 +107,14 @@ Publish assets built from the release tag together with `SHA256SUMS`. Release au
 The root `hostlier-packages.json` makes package discovery available through ordinary Git transport:
 
 ```sh
-hostlier package available --repository https://github.com/Usefused/hostlier-packages.git
-hostlier package install postgres --repository https://github.com/Usefused/hostlier-packages.git --version COMMIT_FROM_LIST --server production
+hostlier package available --repository https://github.com/Hostlier/hostlier-packages.git
+hostlier package install postgres --repository https://github.com/Hostlier/hostlier-packages.git --version COMMIT_FROM_LIST --server production
 ```
 
 Install project adapters on the CLI machine. Choose a commit from discovery and run these commands in a fresh project for each adapter:
 
 ```sh
-catalog=https://github.com/Usefused/hostlier-packages.git
+catalog=https://github.com/Hostlier/hostlier-packages.git
 hostlier package install minion --repository "$catalog" --version COMMIT_FROM_LIST
 hostlier init
 hostlier package add minion
@@ -152,3 +152,5 @@ hostlier package add sandbox-computer
 ```
 
 Use a Hostlier CLI with additive `sidecars` and `secrets` project-contribution support. Browser control uses Playwright; both sandbox packages support Docker and managed k3s. Package executables are published through this catalog. Their separate runtime container images must be built from the included Dockerfiles and supplied as an image or archive; this publication does not upload container images to a registry. See the [sandbox setup guide](packages/sandboxes/README.md) and [validation results](packages/sandboxes/VALIDATION.md).
+
+The repository is owned by the Hostlier organization. The Go module and SDK import path remain `github.com/Usefused/hostlier-packages` for compatibility with existing consumers and pinned versions. Repository and package-catalog URLs use `Hostlier/hostlier-packages`.

@@ -50,4 +50,4 @@ Binaries are limited to 128 MiB. Catalog files are limited to 1 MiB. These limit
 
 Git credentials are not forwarded to arbitrary artifact URLs. Generic HTTPS artifacts must be accessible without repository credentials; store private artifacts as tracked Git blobs when needed. For GitHub-backed catalogs only, exact `api.github.com/repos/OWNER/REPO/releases/assets/ID` URLs for that same repository can reuse the local GitHub token. Other repositories and artifact hosts do not receive it, including after redirects. The catalog format itself is independent of the artifact hosting provider.
 
-Current Hostlier clients use the official Git catalog by default. On older clients with Git-catalog support, use `--repository https://github.com/Usefused/hostlier-packages.git` explicitly. For GitHub release asset discovery and installation, select `--github OWNER/REPO`.
+Current Hostlier clients use the official Git catalog by default. On older clients with Git-catalog support, use `--repository https://github.com/Hostlier/hostlier-packages.git` explicitly. For GitHub release asset discovery and installation, select `--github OWNER/REPO`.

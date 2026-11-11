@@ -7,25 +7,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920032",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920032",
           "sha256": "87f0bdf09334542aa75ee9905706bb4ddeab5564e52e2f6e40c864ea1785e8c2"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920029",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920029",
           "sha256": "45c027e21c29255ada148d0f4857c8e3cbb8422243ad8b881cf3d522c5deb75e"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920027",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920027",
           "sha256": "35759c364ab4fc4502097129ac11ee326dfddff8c0e2ee7c403d4b41fc33dea5"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920026",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920026",
           "sha256": "049f948f152ada077a106be5a35248cc21c778d59eb5df7dcbe5ed7869dfdc7f"
         }
       ]
@@ -94,25 +94,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920030",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920030",
           "sha256": "99caa5960659311f2a9d4e24af58c08ac18c72b055036f40a6045532cbb01200"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920768",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920768",
           "sha256": "a2a4a040dc2b06026d4e1344ed0f21f9d3660790f2d8b692c319e265dfd193e1"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920790",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920790",
           "sha256": "f65fc887980a145db6b28e968dbb2c58c6e542d73f7e501e4c7d87758f8f398a"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920802",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920802",
           "sha256": "3a3af9a1c2ceee8a083fe45da44772673aa8e2fc9da56d6eca682c164df473d8"
         }
       ]
@@ -123,25 +123,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920801",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920801",
           "sha256": "0ee2dfe2f5ac48878605c143bd19615846dd3bb71e7e143d61b365d7e1d887b0"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692920808",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692920808",
           "sha256": "c3d0807fdf825785759763f759e5902b2457311679863ce7043a909692b78a8a"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921142",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921142",
           "sha256": "324ab805d0834952185134fc0c2a6615682f569d606892a4000e0c5b3e21e96b"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921156",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921156",
           "sha256": "43e973c4629a4eea12b1461d90e510696345c1b1fae62d7ff527aa84899eb5d2"
         }
       ]
@@ -152,25 +152,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921301",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921301",
           "sha256": "b26ffbc34caf2e95f20223642e34e14c0572f548ef76eda821b8babb56788dfe"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921403",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921403",
           "sha256": "feec9c82c709ae59275ea25677939a25c0599c2fb81838ac2be9fc5ba55b4b90"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921417",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921417",
           "sha256": "0bf1690d031a4c482c2b793ff67a910fc305d0875c348279454acb0882ee58a3"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921424",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921424",
           "sha256": "89f4cd68eedfe6e31c58072e4c730f7601c151584117f37a88a8e288b5f24055"
         }
       ]
@@ -181,25 +181,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921462",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921462",
           "sha256": "5cb288d80a4b3ba39ffdcfae49e01de090df78baf2bea6d0ad2f1d234348c600"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692921910",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692921910",
           "sha256": "4997234040c541283531a35adfc75d8b867ee54fb070b99cecc37f88d22d2f81"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692922085",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692922085",
           "sha256": "ce6adf70226db931b4e4c0c1af16e4da16af4904e174d89bc47284b12f82e3be"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692922190",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692922190",
           "sha256": "b813460eb8991ab7ea3e9598f592fe90c4c45c082d81410042eb529670d6330e"
         }
       ]
@@ -210,25 +210,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692922202",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692922202",
           "sha256": "94d23af638f60005c63579270879f09d7f40ef1f567e38b0dd03da4b866d23fd"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692922203",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692922203",
           "sha256": "2c9012c5bd9b7c1ac729d7f5f40f18680a16f1498657565391c930c9f6cc9e7e"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692922559",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692922559",
           "sha256": "2982f07134ed2257ba06e9a908d395972774ff4e70b1cf546d249c26507b04b0"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692922936",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692922936",
           "sha256": "fec550a41db1d3078fe66f0ef61b2aef545acbe0e9f13f673fdd4f14d49fc66f"
         }
       ]
@@ -297,25 +297,25 @@
         {
           "os": "darwin",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692923003",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692923003",
           "sha256": "8e08dee41fd436bf10851107a1cf242acc0f62f74d9254137dbab4dac5156a0f"
         },
         {
           "os": "darwin",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692923072",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692923072",
           "sha256": "841d345baa9afdd09550996ecf5659fe07efabf7626b28b06a2548361e388620"
         },
         {
           "os": "linux",
           "arch": "amd64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692923122",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692923122",
           "sha256": "cb80fa47b48ae1c37890d63b4db708055e9a0a6478f8d397ae6b369b92b16ba2"
         },
         {
           "os": "linux",
           "arch": "arm64",
-          "url": "https://api.github.com/repos/Usefused/hostlier-packages/releases/assets/692923231",
+          "url": "https://api.github.com/repos/Hostlier/hostlier-packages/releases/assets/692923231",
           "sha256": "3544b0fcbbf53c9b0c56500be92dea4a8da47dc55a0710efe200587a83e04aa1"
         }
       ]
