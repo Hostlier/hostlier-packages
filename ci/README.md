@@ -1,5 +1,5 @@
 # CI configuration
 
-`github-actions.example.yml` is an inactive GitHub Actions configuration for the package checks and independent Pulumi module. Local verification uses `make check`, `make build linux`, and `make pulumi-test pulumi`.
+`.github/workflows/sandbox-runtimes.yml` is the active manual runtime publication workflow. It builds and exercises both sandboxes on native Linux AMD64 and ARM64 runners before publishing their GHCR platform images and multiarch indexes. Dispatch with a new `version` such as `1.65.0-1`; existing release tags are rejected. The `runtime-images` artifact records immutable index references for a reviewed package catalog update. The first publication of each GHCR package must be made public in its GitHub package settings and verified with an anonymous pull before shipping package defaults.
 
-The GitHub login used for the initial repository push does not have the OAuth `workflow` scope. Consequently no Actions workflow is installed or triggered by this repository. A maintainer with workflow-write permission can copy this file to `.github/workflows/check.yml` to enable it.
+`github-actions.example.yml` remains an inactive example for broader package checks and the independent Pulumi module. Local verification uses `make check`, `make build linux`, and `make pulumi-test pulumi`.
