@@ -1,6 +1,6 @@
 # Hostlier packages
 
-Optional, independently built executables for Hostlier database, provider, and infrastructure operations. This private repository contains the provider package sources and distributes the Minion and Harnest project adapters from their owner repositories.
+Optional, independently built executables for Hostlier database, provider, and infrastructure operations. This public repository contains the provider package sources and distributes the Minion and Harnest project adapters from their owner repositories.
 
 Hostlier core lives in [Hostlier/hostlier](https://github.com/Hostlier/hostlier). The CLI installs package binaries on the server; the controller calls them through versioned JSON over private stdin/stdout pipes. The package source and its implementation dependencies stay outside both core executables.
 
@@ -85,7 +85,7 @@ hostlier package install postgres --github Hostlier/hostlier-packages --version 
 hostlier package list --server production
 ```
 
-The CLI selects the connected server's OS and architecture, downloads the release asset locally, checks SHA-256 and executable format, uploads inert chunks, and requests exact hardware approval before installation. GitHub credentials remain on the CLI machine; authenticate using `gh auth login`, `GH_TOKEN`, or `GITHUB_TOKEN` while this repository is private. The controller requires neither Go, Git, nor GitHub access. Install to a host directly through its saved profile; fleet `--on` routing is not supported for package installation.
+The CLI selects the connected server's OS and architecture, downloads the release asset locally, checks SHA-256 and executable format, uploads inert chunks, and requests exact hardware approval before installation. This repository and its release assets are public; GitHub authentication is optional. Any configured GitHub credentials remain on the CLI machine. The controller requires neither Go, Git, nor GitHub access. Install to a host directly through its saved profile; fleet `--on` routing is not supported for package installation.
 
 The local Go package-authoring SDK can be added to an existing project:
 
@@ -94,13 +94,13 @@ go mod init example.com/my-package
 hostlier sdk install --version v0.1.0
 ```
 
-This resolves the repository tag to a commit and adds `github.com/Usefused/hostlier-packages/sdk/packagekit` through Go modules. It is the standalone package-authoring SDK, distinct from the broader hosting-sdk project. Go and Git are needed on the development machine. Go authentication and private-module settings are scoped to the install command; subsequent direct Go commands need your normal private-module setup.
+This resolves the repository tag to a commit and adds `github.com/Usefused/hostlier-packages/sdk/packagekit` through Go modules. It is the standalone package-authoring SDK, distinct from the broader hosting-sdk project. Go and Git are needed on the development machine. Go authentication and module settings are scoped to the install command; this public module does not require GitHub credentials.
 
 ## Release artifacts
 
 `make release` builds standard packages for Linux and macOS, amd64 and arm64, in `dist/releases/`, with `SHA256SUMS`. Asset names are `hostlier-NAME-OS-ARCH`, as required by the CLI. Set `RELEASE_OS=linux`, `RELEASE_ARCH=arm64`, or `WITH_PULUMI=1` to adjust the build. Pulumi remains an optional separate-module build; standard releases do not include it unless explicitly selected.
 
-Publish assets built from the release tag together with `SHA256SUMS`. Release automation is not active; the inactive Actions example does not publish artifacts. Keep this repository private until explicitly approved for public access.
+Publish assets built from the release tag together with `SHA256SUMS`. Release automation is not active; the inactive Actions example does not publish artifacts. The repository and published release assets are publicly accessible.
 
 ## Provider-independent Git catalog
 
@@ -135,7 +135,7 @@ The commit contains the four Linux/macOS amd64/arm64 executables for each projec
 
 To test discovery, install and enrollment in throwaway projects, run `python3 scripts/test-project-catalog.py --cli /path/to/hostlier --repository "$catalog" --version COMMIT_FROM_LIST`.
 
-The updated Hostlier CLI uses this Git catalog by default. For earlier clients with Git-catalog support, specify `--repository` explicitly. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository remains private, and its own release asset API URLs reuse the local GitHub login.
+The updated Hostlier CLI uses this Git catalog by default. For earlier clients with Git-catalog support, specify `--repository` explicitly. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository and its release assets are public. A local GitHub login is optional.
 
 The catalog format does not require GitHub: each package has named platform artifacts with a SHA-256 and either a tracked-file `path` or an HTTPS `url`. A mirror can host the Git repository on GitLab, Bitbucket, or a self-hosted server and choose its own artifact locations. Generic external HTTPS artifacts do not inherit Git repository credentials; tracked Git blobs support private or offline distribution. See the core [Git catalog guide](docs/git-package-catalog.md) for the schema. Update the catalog in a new commit when publishing replacement binary artifacts; existing commit-based selections retain their previous checksums.
 
