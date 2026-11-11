@@ -1,0 +1,8 @@
+FROM mcr.microsoft.com/playwright:v1.65.0-noble
+WORKDIR /opt/hostlier-sandbox
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+COPY *.mjs ./
+ENV HOME=/tmp/home XDG_CONFIG_HOME=/tmp/home/.config XDG_CACHE_HOME=/tmp/home/.cache SANDBOX_MODE=browser SANDBOX_PORT=9222
+USER pwuser
+ENTRYPOINT ["node", "/opt/hostlier-sandbox/server.mjs"]

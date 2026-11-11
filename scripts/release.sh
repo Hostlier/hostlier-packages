@@ -7,13 +7,13 @@ mkdir -p "$output"
 manifest=$(mktemp "$output/.SHA256SUMS.XXXXXX")
 trap 'rm -f "$manifest"' EXIT HUP INT TERM
 python3 scripts/catalog-project-packages.py --verify
-packages="postgres redis neo4j aiven railway terraform package minion harnest"
+packages="postgres redis neo4j aiven railway terraform package minion harnest sandbox-browser sandbox-computer"
 if [ "${WITH_PULUMI:-0}" = 1 ]; then packages="$packages pulumi"; fi
 for target_os in ${RELEASE_OS:-linux darwin}; do
   for target_arch in ${RELEASE_ARCH:-amd64 arm64}; do
     for name in $packages; do
       artifact="hostlier-$name-$target_os-$target_arch"
-      if [ "$name" = minion ] || [ "$name" = harnest ]; then
+      if [ "$name" = minion ] || [ "$name" = harnest ] || [ "$name" = sandbox-browser ] || [ "$name" = sandbox-computer ]; then
         cp "binaries/$artifact" "$output/$artifact"
       elif [ "$name" = pulumi ]; then
         (cd packages/pulumi && CGO_ENABLED=0 GOOS="$target_os" GOARCH="$target_arch" go build -trimpath -ldflags='-s -w' -o "$output/$artifact" ./cmd/hostlier-pulumi)

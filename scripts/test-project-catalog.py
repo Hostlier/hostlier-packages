@@ -27,10 +27,10 @@ def main():
         catalog = run(cli, root, "package", "available", *selection)
         selection = [*source, "--version", catalog["version"]]
         available = {item["name"] for item in catalog["packages"]}
-        if not {"harnest", "minion", "postgres"} <= available:
+        if not {"harnest", "minion", "postgres", "sandbox-browser", "sandbox-computer"} <= available:
             raise ValueError(f"incomplete package catalog: {available}")
         state = ["--state-dir", str(root / "state")]
-        for name in ("harnest", "minion"):
+        for name in ("harnest", "minion", "sandbox-browser", "sandbox-computer"):
             project = root / name
             project.mkdir()
             run(cli, project, "init")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh the self-contained catalog binaries from the Minion and Harnest source checkouts."""
+"""Build and verify the self-contained project package catalog."""
 import argparse
 import hashlib
 import json
@@ -32,8 +32,8 @@ def build_package(name, source, command, stage):
 
 def verify(packages):
     """Refuse to release bytes that differ from the Git install contract."""
-    for name in ("minion", "harnest"):
-        entries = packages[name]["artifacts"]
+    for name in ("minion", "harnest", "sandbox-browser", "sandbox-computer"):
+        entries = packages.get(name, {}).get("artifacts", [])
         if sorted((e["os"], e["arch"]) for e in entries) != sorted(TARGETS):
             raise SystemExit(f"incomplete platform catalog for {name}")
         for entry in entries:
@@ -46,6 +46,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--hostlier", type=Path, help="Hostlier source checkout containing Minion")
     parser.add_argument("--harnest", type=Path, help="Harnest source checkout")
+    parser.add_argument("--sandboxes", action="store_true", help="refresh both sandbox packages from this checkout")
     parser.add_argument("--verify", action="store_true", help="verify the checked-in catalog without rebuilding")
     args = parser.parse_args()
     catalog = json.loads(CATALOG.read_text())
@@ -53,14 +54,23 @@ def main():
     if args.verify:
         verify(packages)
         return
-    if not args.hostlier or not args.harnest:
-        parser.error("refresh requires --hostlier and --harnest")
-    with tempfile.TemporaryDirectory(dir=ROOT) as temp:
-        stage = Path(temp)
-        for name, source, command in (
+    if bool(args.hostlier) != bool(args.harnest):
+        parser.error("refresh external adapters with both --hostlier and --harnest")
+    if not args.hostlier and not args.sandboxes:
+        parser.error("refresh requires --hostlier and --harnest, or --sandboxes")
+    builds = []
+    if args.hostlier:
+        builds.extend((
             ("minion", args.hostlier, "./packages/minion/cmd/hostlier-minion"),
             ("harnest", args.harnest, "./cmd/hostlier-harnest"),
-        ):
+        ))
+    if args.sandboxes:
+        subprocess.run(["python3", str(ROOT / "packages/sandboxes/generate_seccomp.py"), "--check"], check=True)
+        builds.extend((name, ROOT, "./cmd/hostlier-" + name)
+                      for name in ("sandbox-browser", "sandbox-computer"))
+    with tempfile.TemporaryDirectory(dir=ROOT) as temp:
+        stage = Path(temp)
+        for name, source, command in builds:
             packages[name] = build_package(name, source.resolve(), command, stage)
         (ROOT / "binaries").mkdir(exist_ok=True)
         for output in (stage / "binaries").iterdir():

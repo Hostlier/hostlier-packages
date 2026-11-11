@@ -1,5 +1,5 @@
 .PHONY: build packages linux packages-linux test check pulumi pulumi-test clean
-PACKAGES := postgres redis neo4j aiven railway terraform package
+PACKAGES := postgres redis neo4j aiven railway terraform package sandbox-browser sandbox-computer
 
 PROJECT_PACKAGES := minion harnest
 

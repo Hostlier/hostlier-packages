@@ -1,0 +1,7 @@
+{
+  "name": "hostlier-sandbox-runtime",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test test/*.test.mjs"},
+  "dependencies": {"playwright": "1.65.0"}
+}

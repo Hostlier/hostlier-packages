@@ -2,7 +2,7 @@
 
 Optional, independently built executables for Hostlier database, provider, and infrastructure operations. This private repository contains the provider package sources and distributes the Minion and Harnest project adapters from their owner repositories.
 
-Hostlier core lives in [Usefused/hosting-sdk](https://github.com/Usefused/hosting-sdk/tree/main/hostlier). The CLI installs package binaries on the server; the controller calls them through versioned JSON over private stdin/stdout pipes. The package source and its implementation dependencies stay outside both core executables.
+Hostlier core lives in [Hostlier/hostlier](https://github.com/Hostlier/hostlier). The CLI installs package binaries on the server; the controller calls them through versioned JSON over private stdin/stdout pipes. The package source and its implementation dependencies stay outside both core executables.
 
 ## Packages
 
@@ -10,6 +10,8 @@ Hostlier core lives in [Usefused/hosting-sdk](https://github.com/Usefused/hostin
 | --- | --- | --- |
 | `hostlier-minion` | Hostlier’s Minion package | Local app initialization, planning and container packaging |
 | `hostlier-harnest` | Harnest’s Hostlier adapter | Local agent initialization, planning and container packaging |
+| `hostlier-sandbox-browser` | [Sandbox sidecars](packages/sandboxes/README.md) | Playwright browser service attached to an existing app |
+| `hostlier-sandbox-computer` | [Sandbox sidecars](packages/sandboxes/README.md) | Linux desktop with screenshot, keyboard and mouse API |
 | `hostlier-postgres` | [Native engines](packages/engines), [runtime adapters](internal/resources) | Local PostgreSQL instances; scoped databases on existing servers |
 | `hostlier-redis` | [Native engines](packages/engines), [runtime adapters](internal/resources) | Local Redis instances; ACL-scoped access on existing servers |
 | `hostlier-neo4j` | [Runtime adapters](internal/resources) | Local Neo4j resource operations |
@@ -129,10 +131,23 @@ packages:
 
 Planning verifies that the index contains a compatible manifest and records its digest for packaging.
 
-The commit contains the four Linux/macOS amd64/arm64 executables for each project adapter under `binaries/`. Every catalog entry pins the SHA-256 of the corresponding file. The release script uses these same verified bytes. To refresh them from reviewed source checkouts, run `python3 scripts/catalog-project-packages.py --hostlier /path/to/hostlier --harnest /path/to/Harnest`, then commit the regenerated binaries and catalog together. Run `python3 scripts/catalog-project-packages.py --verify` to check all eight without building or downloading anything.
+The commit contains the four Linux/macOS amd64/arm64 executables for each project adapter under `binaries/`. Every catalog entry pins the SHA-256 of the corresponding file. The release script uses these same verified bytes. To refresh them from reviewed source checkouts, run `python3 scripts/catalog-project-packages.py --hostlier /path/to/hostlier --harnest /path/to/Harnest`, then commit the regenerated binaries and catalog together. Refresh the browser and computer sandbox adapters from this checkout with `python3 scripts/catalog-project-packages.py --sandboxes`. Run `python3 scripts/catalog-project-packages.py --verify` to check all sixteen project-adapter artifacts without building or downloading anything.
 
 To test discovery, install and enrollment in throwaway projects, run `python3 scripts/test-project-catalog.py --cli /path/to/hostlier --repository "$catalog" --version COMMIT_FROM_LIST`.
 
 The updated Hostlier CLI uses this Git catalog by default. For earlier clients with Git-catalog support, specify `--repository` explicitly. Discovery returns the resolved source commit as `version`; copy it into the install command. The original `v0.1.0` tag predates this catalog, so select a current catalog commit instead. The repository remains private, and its own release asset API URLs reuse the local GitHub login.
 
 The catalog format does not require GitHub: each package has named platform artifacts with a SHA-256 and either a tracked-file `path` or an HTTPS `url`. A mirror can host the Git repository on GitLab, Bitbucket, or a self-hosted server and choose its own artifact locations. Generic external HTTPS artifacts do not inherit Git repository credentials; tracked Git blobs support private or offline distribution. See the core [Git catalog guide](docs/git-package-catalog.md) for the schema. Update the catalog in a new commit when publishing replacement binary artifacts; existing commit-based selections retain their previous checksums.
+
+## Sandbox sidecars
+
+The Git catalog includes `sandbox-browser` and `sandbox-computer` for macOS/Linux on AMD64/ARM64. Install them on the CLI machine and add them to an existing v2 application:
+
+```sh
+hostlier package install sandbox-browser
+hostlier package install sandbox-computer
+hostlier package add sandbox-browser
+hostlier package add sandbox-computer
+```
+
+Use a Hostlier CLI with additive `sidecars` and `secrets` project-contribution support. Browser control uses Playwright; both sandbox packages support Docker and managed k3s. Package executables are published through this catalog. Their separate runtime container images must be built from the included Dockerfiles and supplied as an image or archive; this publication does not upload container images to a registry. See the [sandbox setup guide](packages/sandboxes/README.md) and [validation results](packages/sandboxes/VALIDATION.md).

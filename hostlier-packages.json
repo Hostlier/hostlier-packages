@@ -234,6 +234,64 @@
       ]
     },
     {
+      "name": "sandbox-browser",
+      "artifacts": [
+        {
+          "os": "darwin",
+          "arch": "amd64",
+          "path": "binaries/hostlier-sandbox-browser-darwin-amd64",
+          "sha256": "dc9c8243051fb68649ced0deaae61c33945d365c8e69272eae434dd896a57c7a"
+        },
+        {
+          "os": "darwin",
+          "arch": "arm64",
+          "path": "binaries/hostlier-sandbox-browser-darwin-arm64",
+          "sha256": "c875dba522b20290935f4d8a22a03aa344f842fee22877bc09a442082818f874"
+        },
+        {
+          "os": "linux",
+          "arch": "amd64",
+          "path": "binaries/hostlier-sandbox-browser-linux-amd64",
+          "sha256": "e5cc4af554f8c413c6953b102cd4c2ce09a87cf6a7051a7e1e5ee3bc0fc3262b"
+        },
+        {
+          "os": "linux",
+          "arch": "arm64",
+          "path": "binaries/hostlier-sandbox-browser-linux-arm64",
+          "sha256": "078847a74b65486be9e2e2a03e713b1965dc640e0354685e5a835daf26bf50c5"
+        }
+      ]
+    },
+    {
+      "name": "sandbox-computer",
+      "artifacts": [
+        {
+          "os": "darwin",
+          "arch": "amd64",
+          "path": "binaries/hostlier-sandbox-computer-darwin-amd64",
+          "sha256": "c93585aabb67f23caa8bc285e7fd6901929fb7ab1ce88d246a97981ec5e0b030"
+        },
+        {
+          "os": "darwin",
+          "arch": "arm64",
+          "path": "binaries/hostlier-sandbox-computer-darwin-arm64",
+          "sha256": "aeede4e6bb63544b2098f23d5f3d8e8d1ed5f195d727baed3002d048589df2a7"
+        },
+        {
+          "os": "linux",
+          "arch": "amd64",
+          "path": "binaries/hostlier-sandbox-computer-linux-amd64",
+          "sha256": "9141dc26bfaacf7e7b6634905227ac48513010d58e4a818eaffca110da765eed"
+        },
+        {
+          "os": "linux",
+          "arch": "arm64",
+          "path": "binaries/hostlier-sandbox-computer-linux-arm64",
+          "sha256": "6743668ff0d3a343f43fc0911861e357b8d89cc2d37f83ddd75e741ae5c67bfc"
+        }
+      ]
+    },
+    {
       "name": "terraform",
       "artifacts": [
         {

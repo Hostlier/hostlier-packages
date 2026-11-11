@@ -1,0 +1,27 @@
+# Sandbox sidecar verification — 2026-11-11
+
+Validated on macOS ARM64 with Docker Desktop's Linux ARM64 runtime, and on an isolated Ubuntu 24.04 ARM64 VM running Hostlier's pinned k3s v1.34.12+k3s1.
+
+- Built both Go package executables and installed them into an isolated Hostlier state directory. The updated Hostlier CLI composed both packages into one v2 application with the expected loopback endpoints, scoped secret references, security profiles and parent bindings. Both registry image and local archive source declarations passed structural validation.
+- The Hostlier CLI, package executor, package SDK, configuration and runtime Go suites passed. Focused composition tests cover actual hook processes, authored/sibling conflicts, parent binding names, public member rejection, port collisions and nested deployment rejection. Changed Hostlier Go files passed the repository complexity/comment checker. The broader existing CLI quality scan still reports unrelated findings in untouched files.
+- Both package command builds, package tests and `go vet` passed. Four Node test groups passed for authentication, configuration, action validation and request bounds.
+- Both runtime images built with Playwright 1.65.0.
+- Live Docker tests ran both sidecars in the same private network namespace and exercised them from separate parent-like client containers, with no published host ports. All test containers were removed afterward.
+- Browser tests passed: unauthenticated HTTP and WebSocket requests rejected, browser-origin requests rejected, remote Playwright connection, navigation, button click, PNG screenshot and independent browser contexts/cookies.
+- Computer tests passed: unauthenticated requests rejected, 1280×800 PNG screenshots, mouse clicks, text entry, key chords, scrolling, invalid coordinate rejection and visible desktop change after actions.
+- Runtime checks used UID/GID 1000, read-only roots, dropped capabilities, no-new-privileges, 2 GiB memory with no swap, 2 CPUs, 512 PIDs, a bounded `/tmp` tmpfs and the contributed seccomp profile. Chromium's namespace sandbox remained enabled.
+
+The upstream Playwright seccomp profile filters `chroot` behind the outer container's `CAP_SYS_CHROOT`; with all capabilities dropped, Chromium initially failed its inner user-namespace setup. The supplied profile adds only an unconditional `chroot` allow rule. The kernel still requires the relevant namespace capability. The same live tests then passed without adding any outer container capability or disabling Chromium's sandbox.
+
+## k3s addition
+
+- Both packages now embed deterministic OCI seccomp profiles for AMD64 and ARM64. The request's receiving-server architecture selects the profile. Profile generation evaluates Docker's capability and architecture filters for `cap-drop=ALL`, preserves argument restrictions and rejects unknown metadata. Tests reject regressions that admit privileged mount, reboot, module-loading or BPF operations.
+- Package tests and profile regeneration checks passed for both architectures. Four Python generator tests, all four Node test groups and Go vet passed. The same live Docker tests passed again using the new OCI profiles.
+- Hostlier's opt-in `TestSandboxPackagesK3s` ran both real package executables for both target architectures and passed the Kubernetes renderer's security gate. Assertions cover native sidecar ordering, scoped token references, required exec probes, distinct bounded memory scratch and exact content-addressed `Localhost` profile names. The new Go test file passed the repository's complexity/comment checker.
+- Live k3s validation used a disposable 4-CPU, 6 GiB Ubuntu VM without host directory mounts. The k3s binary matched Hostlier's pinned ARM64 checksum. Both locally built images were imported into containerd; generated Hostlier manifests and their exact seccomp profiles were installed. The fixture configured each sidecar with 1 CPU and 2 GiB RAM and used independent random tokens. The parent and both native sidecars reached 3/3 readiness.
+- From the parent container, the same browser and desktop live tests passed: authenticated remote Playwright, context isolation, navigation, clicks, screenshots, desktop text entry, keyboard and scrolling. Authentication rejection tests passed too.
+- Live container status confirmed UID 1000, zero effective capabilities, `NoNewPrivs=1` and `Seccomp=2`. Kubelet inspection confirmed the stricter shared 256-process Pod ceiling, `failSwapOn=true` and no swap behavior; `/proc/swaps` had no active entries. No sandbox host ports or Services were created. The temporary test VM was removed afterward.
+- A first nested Docker k3s attempt correctly failed because Docker Desktop's host swap was active. Validation moved to the isolated VM without relaxing the node contract.
+- Focused Hostlier sandbox/k3s and composition tests and Go vet passed. A rerun of the broader runtime/CLI suites hit the laptop filesystem's existing 5% free-space reserve check in artifact tests; the sandbox-specific tests passed. Earlier broad-suite success above predates this rerun.
+
+Not verified: a production Hostlier server rollout, live Linux AMD64, persistent desktop/profile storage, independent sandbox scheduling or public ingress. AMD64 profiles and manifests were tested structurally; live services were tested on ARM64. The sandbox package executables are published in the Git catalog for macOS/Linux on AMD64/ARM64. Runtime container images have not been published to a registry.
