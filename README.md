@@ -151,6 +151,6 @@ hostlier package add sandbox-browser
 hostlier package add sandbox-computer
 ```
 
-Use a Hostlier CLI with additive `sidecars` and `secrets` project-contribution support. Browser control uses Playwright; both sandbox packages support Docker and managed k3s. Package executables are published through this catalog. Their separate runtime container images must be built from the included Dockerfiles and supplied as an image or archive; this publication does not upload container images to a registry. See the [sandbox setup guide](packages/sandboxes/README.md) and [validation results](packages/sandboxes/VALIDATION.md).
+Use [Hostlier v0.1.5 or later](https://github.com/Hostlier/hostlier/releases/tag/v0.1.5) for the CLI and controller; it includes additive `sidecars` and `secrets` project-contribution support. Browser control uses Playwright; both sandbox packages support Docker and managed k3s. Package executables are published through this catalog. Their separate runtime container images must be built from the included Dockerfiles and supplied as an image or archive; this publication does not upload container images to a registry. See the [sandbox setup guide](packages/sandboxes/README.md) and [validation results](packages/sandboxes/VALIDATION.md).
 
 The repository is owned by the Hostlier organization. The Go module and SDK import path remain `github.com/Usefused/hostlier-packages` for compatibility with existing consumers and pinned versions. Repository and package-catalog URLs use `Hostlier/hostlier-packages`.
